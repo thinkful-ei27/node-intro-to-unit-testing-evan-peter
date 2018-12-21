@@ -90,4 +90,19 @@ describe("Recipe List", function () {
         })
     );
   });
+
+  it('should delete items on DELETE', function () {
+    return (
+      chai
+        .request(app)
+        .get('/recipes')
+        .then(function (res) {
+          return chai.request(app)
+            .delete(`/recipes/${res.body[0].id}`)
+        })
+        .then(function(res) {
+          expect(res).to.have.status(204);
+        })
+    )
+  })
 });
